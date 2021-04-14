@@ -1,5 +1,4 @@
 from django.db.models import Q
-from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from books.forms import BookModelForm, CategoryModelForm

@@ -18,5 +18,5 @@ class AuthorModelAdmin(admin.ModelAdmin):
 
 @admin.register(CategoryModel)
 class CategoryModelAdmin(admin.ModelAdmin):
-    list_display = ['title', ]
+    list_display = ['title']
     search_fields = ['title']
