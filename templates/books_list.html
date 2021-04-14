@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Page count</th>
+            <th>Description</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Created date</th>
+            <th>Updated date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in object_list %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.page_count|default:'-' }}</td>
+                <td>{{ book.description|safe }}</td>
+                <td>{{ book.author.name }}</td>
+                <td>{{ book.category.title }}</td>
+                <td>{{ book.created_at|date:'d.m.Y H:i' }}</td>
+                <td>{{ book.updated_at|date:'d.m.Y H:i' }}</td>
+                <td class="text-center">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="/update/{{ book.pk }}/">
+                                <i class="fa fa-pen text-warning"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 px-0">
+                            <form onsubmit="return confirm('You sure?')" method="POST" action="/delete/{{ book.pk }}/">
+                                {% csrf_token %}
+                                <button class="submit-icon" type="submit">
+                                    <i class="fa fa-trash text-danger"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
